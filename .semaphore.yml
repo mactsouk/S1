@@ -7,5 +7,4 @@ blocks:
         - name: My Semaphore 2.0 job
           commands:
             - echo $SEMAPHORE_PIPELINE_ID
-            - echo "Hello Cruel World!"
             - echo "Hello World!"
