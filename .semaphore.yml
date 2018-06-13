@@ -8,3 +8,4 @@ blocks:
           commands:
             - echo $SEMAPHORE_PIPELINE_ID
             - echo "Hello Cruel World!"
+            - echo "Hello World!"
