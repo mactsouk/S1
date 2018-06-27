@@ -10,3 +10,4 @@ blocks:
             - echo "Hello World!"
       secrets:
         - name: more-mihalis-secrets
+           env_var_names:
