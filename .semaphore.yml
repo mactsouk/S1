@@ -8,3 +8,5 @@ blocks:
           commands:
             - echo $SEMAPHORE_PIPELINE_ID
             - echo "Hello World!"
+      secrets:
+        - name: more-mihalis-secrets
