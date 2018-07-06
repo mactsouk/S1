@@ -18,5 +18,5 @@ blocks:
                - echo $SECRET_TWO
                - ls -l .semaphore
        secrets:
-           - name: more-mihalis-secrets
+          - name: more-mihalis-secrets
              env_var_names: []
