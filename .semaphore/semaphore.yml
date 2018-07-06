@@ -4,20 +4,20 @@ semaphore_image: standard
 blocks:
   - name: My Build
      build:
-      jobs:
-        - name: My Semaphore 2.0 job
-          commands:
-            - checkout
-            - ls -l .semaphore
-            - echo $SEMAPHORE_PIPELINE_ID
-            - echo "Hello World!"
-            - echo $SECRET_ONE
-            - echo $SECRET_TWO
-        - name: My secnd Semaphore 2.0 job
-          commands:
-            - checkout
-            - echo $SECRET_TWO
-            - ls -l .semaphore
-      secrets:
-        - name: more-mihalis-secrets
-          env_var_names: []
+       jobs:
+          - name: My Semaphore 2.0 job
+            commands:
+              - checkout
+                - ls -l .semaphore
+              - echo $SEMAPHORE_PIPELINE_ID
+              - echo "Hello World!"
+              - echo $SECRET_ONE
+              - echo $SECRET_TWO
+          - name: My secnd Semaphore 2.0 job
+            commands:
+              - checkout
+              - echo $SECRET_TWO
+              - ls -l .semaphore
+       secrets:
+          - name: more-mihalis-secrets
+            env_var_names: []
