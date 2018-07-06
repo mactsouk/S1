@@ -15,3 +15,8 @@ blocks:
       secrets:
         - name: more-mihalis-secrets
           env_var_names: []
+        - name: My secnd Semaphore 2.0 job
+          commands:
+            - checkout
+            - echo $SECRET_TWO
+            - ls -l .semaphore
