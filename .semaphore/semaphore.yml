@@ -12,11 +12,11 @@ blocks:
             - echo "Hello World!"
             - echo $SECRET_ONE
             - echo $SECRET_TWO
-#          - name: My second Semaphore 2.0 job
-#             commands:
-#               - checkout
-#               - echo $SECRET_TWO
-#               - ls -l .semaphore
+        - name: My second Semaphore 2.0 job
+          commands:
+            - checkout
+            - echo $SECRET_TWO
+            - ls -l .semaphore
       secrets:
         - name: mySecrets
           env_var_names: []
