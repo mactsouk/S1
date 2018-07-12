@@ -3,7 +3,7 @@ name: Basic, 1 task YAML file example.
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804-beta
+    os_image: ubuntu1804
 blocks:
 # Is this a valid comment?
 # Yes it is!
