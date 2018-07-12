@@ -1,27 +1,19 @@
 version: "v1.0"
-name: Basic YAML configuration file example.
+name: Basic, 1 block YAML file example.
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804-beta
 blocks:
-  - task:
+# Is this a valid comment?
+# Yes it is!
+ - name: This is Block
+   task:
       jobs:
-        - name: My Semaphore 2.0 job
+        - name: Job 1 from 1st build block
           commands:
-            - checkout
-            - ls -l .semaphore
             - echo $SEMAPHORE_PIPELINE_ID
-            - echo "Hello World!"
-            - echo $SECRET_ONE
-            - echo $SECRET_TWO
-        - name: My second Semaphore 2.0 job
+        - name: Job 2 from 1st build block
           commands:
-            - checkout
-            - echo $SECRET_TWO
-            - ls -l .semaphore
-      secrets:
-        - name: mySecrets
-          env_var_names: []
-        - name: more-mihalis-secrets
-          env_var_names: []
+            - echo "This is from the 2nd job of 1st build block"
+            - echo $SEMAPHORE_PIPELINE_ID
