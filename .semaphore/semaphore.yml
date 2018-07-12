@@ -1,5 +1,5 @@
 version: "v1.0"
-name: Basic, 1 block YAML file example.
+name: Basic, 1 task YAML file example.
 agent:
   machine:
     type: e1-standard-2
@@ -10,10 +10,10 @@ blocks:
  - name: This is Block
    task:
       jobs:
-        - name: Job 1 from 1st build block
+        - name: Job 1 from 1st task block
           commands:
             - echo $SEMAPHORE_PIPELINE_ID
-        - name: Job 2 from 1st build block
+        - name: Job 2 from 1st task block
           commands:
-            - echo "This is from the 2nd job of 1st build block"
+            - echo "This is from the 2nd job of 1st task block"
             - echo $SEMAPHORE_PIPELINE_ID
