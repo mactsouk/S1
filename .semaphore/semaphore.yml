@@ -1,19 +1,27 @@
 version: "v1.0"
-name: Basic, 1 task YAML file example.
+name: Basic YAML configuration file with secrets 
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu1804-beta
 blocks:
-# Is this a valid comment?
-# Yes it is!
- - name: This is Block
-   task:
+  - task:
       jobs:
-        - name: Job 1 from 1st task block
+        - name: My Semaphore 2.0 job
           commands:
+            - checkout
+            - ls -l .semaphore
             - echo $SEMAPHORE_PIPELINE_ID
-        - name: Job 2 from 1st task block
+            - echo "Hello World!"
+            - echo $SECRET_ONE
+            - echo $SECRET_TWO
+        - name: My second Semaphore 2.0 job
           commands:
-            - echo "This is from the 2nd job of 1st task block"
-            - echo $SEMAPHORE_PIPELINE_ID
+            - checkout
+            - echo $SECRET_TWO
+            - ls -l .semaphore
+      secrets:
+        - name: mySecrets
+          env_var_names: []
+        - name: more-mihalis-secrets
+          env_var_names: []
