@@ -1,5 +1,5 @@
 version: "v1.0"
-name: Basic YAML configuration file with secrets 
+name: YAML configuration file with secrets 
 agent:
   machine:
     type: e1-standard-2
