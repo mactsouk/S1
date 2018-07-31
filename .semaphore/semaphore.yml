@@ -1,5 +1,5 @@
 version: "v1.0"
-name: YAML configuration file with secrets 
+name: Pipeline configuration with secrets 
 agent:
   machine:
     type: e1-standard-2
