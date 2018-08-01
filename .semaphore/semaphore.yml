@@ -22,6 +22,6 @@ blocks:
             - ls -l .semaphore
       secrets:
         - name: mySecrets
-          env_var_names: []
         - name: more-mihalis-secrets
-          env_var_names: []
+#          env_var_names: []
+#          env_var_names: []
