@@ -1,10 +1,13 @@
 version: v1.0
-name: Basic YAML configuration file example
-semaphore_image: standard
+name: Pipeline configuration with secrets 
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
 blocks:
-  - build:
+  - task:
       jobs:
-        - name: My Semaphore 2.0 job
+        - name: Using secrets 
           commands:
             - checkout
             - ls -l .semaphore
@@ -12,7 +15,7 @@ blocks:
             - echo "Hello World!"
             - echo $SECRET_ONE
             - echo $SECRET_TWO
-        - name: My second Semaphore 2.0 job
+        - name: Using SECRET_TWO
           commands:
             - checkout
             - echo $SECRET_TWO
@@ -20,4 +23,3 @@ blocks:
       secrets:
         - name: mySecrets
         - name: more-mihalis-secrets
-
