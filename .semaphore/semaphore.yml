@@ -1,5 +1,5 @@
-version: "v1.0"
-name: Basic YAML configuration file example.
+version: v1.0
+name: Basic YAML configuration file example
 semaphore_image: standard
 blocks:
   - build:
@@ -19,6 +19,5 @@ blocks:
             - ls -l .semaphore
       secrets:
         - name: mySecrets
-          env_var_names: []
         - name: more-mihalis-secrets
-          env_var_names: []
+
