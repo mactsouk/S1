@@ -15,11 +15,16 @@ blocks:
             - echo "Hello World!"
             - echo $SECRET_ONE
             - echo $SECRET_TWO
+
         - name: Using SECRET_TWO
           commands:
             - checkout
             - echo $SECRET_TWO
             - ls -l .semaphore
+            - echo $SEMAPHORE_GIT_SHA
+            - echo $SEMAPHORE_GIT_URL
+            - echo $SEMAPHORE_GIT_DIR
+
       secrets:
         - name: mySecrets
         - name: more-mihalis-secrets
