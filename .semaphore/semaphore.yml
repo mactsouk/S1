@@ -10,13 +10,11 @@ blocks:
         - name: Using secrets 
           commands:
             - checkout
-            - curl https://github.com/mactsouk.keys >> ~/.ssh/authorized_keys
             - ls -l .semaphore
             - echo $SEMAPHORE_PIPELINE_ID
             - echo "Hello World!"
             - echo $SECRET_ONE
             - echo $SECRET_TWO
-            - sleep 360
 
         - name: Using SECRET_TWO
           commands:
