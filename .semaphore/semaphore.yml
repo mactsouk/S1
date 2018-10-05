@@ -15,6 +15,7 @@ blocks:
             - echo "Hello World!"
             - echo $SECRET_ONE
             - echo $SECRET_TWO
+            - sleep 360
 
         - name: Using SECRET_TWO
           commands:
