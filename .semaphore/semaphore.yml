@@ -37,7 +37,7 @@ blocks:
              - checkout
        env_vars:
             - name: PIPENV_VENV_IN_PROJECT
-              value: true
+              value: "true"
 
   - name: Test everything
     task:
@@ -50,4 +50,4 @@ blocks:
              - checkout
        env_vars:
             - name: PIPENV_VENV_IN_PROJECT
-              value: true
+              value: "true"
