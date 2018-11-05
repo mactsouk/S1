@@ -9,6 +9,21 @@ blocks:
   - name: Sample Task
     task:
        jobs:
+         - name: Check environment variables
+           commands:
+             - echo $SEMAPHORE_PIPELINE_ID
+             - echo $HOME
+             - echo $PI
+             - pwd
+       prologue:
+           commands:
+             - checkout
+       env_vars:
+            - name: PI
+              value: "3.14159"
+
+    task:
+       jobs:
          - name: Install and cache dependencies
            commands:
              - cache restore pipenv-$(checksum Pipfile.lock)- echo $SEMAPHORE_PIPELINE_ID
