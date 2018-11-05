@@ -6,22 +6,20 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-
   - name: Sample Task
-   task:
-      jobs:
-        - name: Check environment variables
-          commands:
-            - echo $SEMAPHORE_PIPELINE_ID
-            - echo $HOME
-            - echo $PI
-            - pwd
-      prologue:
-          commands:
-            - checkout
-      env_vars:
-           - name: PI
-             value: "3.14159"
-
+    task:
+       jobs:
+         - name: Check environment variables
+           commands:
+             - echo $SEMAPHORE_PIPELINE_ID
+             - echo $HOME
+             - echo $PI
+             - pwd
+       prologue:
+           commands:
+             - checkout
+       env_vars:
+            - name: PI
+              value: "3.14159"
 
 
