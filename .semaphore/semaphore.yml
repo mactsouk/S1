@@ -22,15 +22,9 @@ blocks:
             - name: PI
               value: "3.14159"
 
+
   - name: Install dependencies
     task:
-       env_vars:
-         - name: PIPENV_VENV_IN_PROJECT
-           value: true
-       prologue:
-         commands:
-           - sudo pip install pipenv
-           - checkout
        jobs:
          - name: Install and cache dependencies
            commands:
@@ -38,19 +32,28 @@ blocks:
              # --deploy also checks python version requirements
              - pipenv install --dev --deploy
              - cache store pipenv-$(checksum Pipfile.lock) .venv
+       prologue:
+           commands:
+             - sudo pip install pipenv
+             - checkout
+       env_vars:
+            - name: PIPENV_VENV_IN_PROJECT
+              value: true
+
 
   - name: Tests
     task:
-       env_vars:
-         - name: PIPENV_VENV_IN_PROJECT
-           value: true
-       prologue:
-         commands:
-           - sudo pip install pipenv
-           - checkout
-           - cache restore pipenv-$(checksum Pipfile.lock)
        jobs:
          - name: Everything
            commands:
              # assuming you have "test" in your Pipfile scripts
              - pipenv run test
+       prologue:
+           commands:
+             - sudo pip install pipenv
+             - checkout
+             - cache restore pipenv-$(checksum Pipfile.lock)
+       env_vars:
+            - name: PIPENV_VENV_IN_PROJECT
+              value: true
+
