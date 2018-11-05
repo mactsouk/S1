@@ -6,34 +6,22 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: Install dependencies
-    task:
-      env_vars:
-        - name: PIPENV_VENV_IN_PROJECT
-          value: true
-      prologue:
-        commands:
-          - sudo pip install pipenv
-          - checkout
+
+  - name: Sample Task
+   task:
       jobs:
-        - name: Install and cache dependencies
+        - name: Check environment variables
           commands:
-            - cache restore pipenv-$(checksum Pipfile.lock)
-            # --deploy also checks python version requirements
-            - pipenv install --dev --deploy
-            - cache store pipenv-$(checksum Pipfile.lock) .venv
-  - name: Tests
-    task:
-      env_vars:
-        - name: PIPENV_VENV_IN_PROJECT
-          value: true
+            - echo $SEMAPHORE_PIPELINE_ID
+            - echo $HOME
+            - echo $PI
+            - pwd
       prologue:
-        commands:
-          - sudo pip install pipenv
-          - checkout
-          - cache restore pipenv-$(checksum Pipfile.lock)
-      jobs:
-        - name: Everything
           commands:
-            # assuming you have "test" in your Pipfile scripts
-            - pipenv run test
+            - checkout
+      env_vars:
+           - name: PI
+             value: "3.14159"
+
+
+
