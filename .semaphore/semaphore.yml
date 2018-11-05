@@ -23,3 +23,33 @@ blocks:
               value: "3.14159"
 
 
+  - name: Install dependencies
+    task:
+       jobs:
+         - name: Install and cache dependencies
+           commands:
+             - cache restore pipenv-$(checksum Pipfile.lock)- echo $SEMAPHORE_PIPELINE_ID
+             # --deploy also checks python version requirements- echo $HOME
+             - pipenv install --dev --deploy- echo $PI
+             - cache store pipenv-$(checksum Pipfile.lock) .venv- pwd
+       prologue:
+           commands:
+             - sudo pip install pipenv
+             - checkout
+       env_vars:
+            - name: PIPENV_VENV_IN_PROJECT
+              value: true
+
+  - name: Sample Task
+    task:
+       jobs:
+         - name: Everything
+           commands:
+             - pipenv run test
+       prologue:
+           commands:
+             - checkout
+       env_vars:
+            - name: PIPENV_VENV_IN_PROJECT
+              value: true
+
