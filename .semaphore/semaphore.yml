@@ -22,34 +22,65 @@ blocks:
             - name: PI
               value: "3.14159"
 
-
-  - name: Install dependencies
+  - name: Sample Task 2
     task:
        jobs:
-         - name: Install and cache dependencies
+         - name: Check environment variables
            commands:
-             - cache restore pipenv-$(checksum Pipfile.lock)- echo $SEMAPHORE_PIPELINE_ID
-             # --deploy also checks python version requirements- echo $HOME
-             - pipenv install --dev --deploy- echo $PI
-             - cache store pipenv-$(checksum Pipfile.lock) .venv- pwd
-       prologue:
-           commands:
-             - sudo pip install pipenv
-             - checkout
-       env_vars:
-            - name: PIPENV_VENV_IN_PROJECT
-              value: true
-
-  - name: Sample Task
-    task:
-       jobs:
-         - name: Everything
-           commands:
-             - pipenv run test
+             - echo $SEMAPHORE_PIPELINE_ID
+             - echo $HOME
+             - echo $PI
+             - pwd
        prologue:
            commands:
              - checkout
        env_vars:
-            - name: PIPENV_VENV_IN_PROJECT
-              value: true
+            - name: PI
+              value: "3.14159"
+			  
+  - name: Sample Task 3
+    task:
+       jobs:
+         - name: Check environment variables
+           commands:
+             - echo $SEMAPHORE_PIPELINE_ID
+             - echo $HOME
+             - echo $PI
+             - pwd
+       prologue:
+           commands:
+             - checkout
+       env_vars:
+            - name: PI
+              value: "3.14159"
 
+#  - name: Install dependencies
+#    task:
+#       jobs:
+#         - name: Install and cache dependencies
+#           commands:
+#             - cache restore pipenv-$(checksum Pipfile.lock)- echo $SEMAPHORE_PIPELINE_ID
+#             # --deploy also checks python version requirements- echo $HOME
+#             - pipenv install --dev --deploy- echo $PI
+#             - cache store pipenv-$(checksum Pipfile.lock) .venv- pwd
+#       prologue:
+#           commands:
+#             - sudo pip install pipenv
+#             - checkout
+#       env_vars:
+#            - name: PIPENV_VENV_IN_PROJECT
+#              value: true
+#
+#  - name: Sample Task
+#    task:
+#       jobs:
+#         - name: Everything
+#           commands:
+#             - pipenv run test
+#       prologue:
+#           commands:
+#             - checkout
+#       env_vars:
+#            - name: PIPENV_VENV_IN_PROJECT
+#              value: true
+#
