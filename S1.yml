@@ -1,7 +1,30 @@
-apiVersion: v1alpha
-kind: Project
-metadata:
-  name: S1
-spec:
-  repository:
-    url: "git@github.com:mactsouk/S1.git"
+version: v1.0
+name: Pipeline configuration with secrets 
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - task:
+      jobs:
+        - name: Using secrets 
+          commands:
+            - checkout
+            - ls -l .semaphore
+            - echo $SEMAPHORE_PIPELINE_ID
+            - echo "Hello World!"
+            - echo $SECRET_ONE
+            - echo $SECRET_TWO
+
+        - name: Using SECRET_TWO
+          commands:
+            - checkout
+            - echo $SECRET_TWO
+            - ls -l .semaphore
+            - echo $SEMAPHORE_GIT_SHA
+            - echo $SEMAPHORE_GIT_URL
+            - echo $SEMAPHORE_GIT_DIR
+
+      secrets:
+        - name: mySecrets
+        - name: more-mihalis-secrets
