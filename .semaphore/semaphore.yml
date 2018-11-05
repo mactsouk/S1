@@ -1,53 +1,30 @@
 version: v1.0
-name: Python Example
+name: Pipeline configuration with secrets 
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-
 blocks:
-  - name: Sample Task
-    task:
-       jobs:
-         - name: Check environment variables
-           commands:
-             - echo $SEMAPHORE_PIPELINE_ID
-             - echo $HOME
-             - echo $PI
-             - pwd
-       prologue:
-           commands:
-             - checkout
-       env_vars:
-            - name: PI
-              value: "3.14159"
+  - task:
+      jobs:
+        - name: Using secrets 
+          commands:
+            - checkout
+            - ls -l .semaphore
+            - echo $SEMAPHORE_PIPELINE_ID
+            - echo "Hello World!"
+            - echo $SECRET_ONE
+            - echo $SECRET_TWO
 
-  - name: Install
-    task:
-       jobs:
-         - name: Install and cache dependencies
-           commands:
-             - cache restore pipenv-$(checksum Pipfile.lock)- echo $SEMAPHORE_PIPELINE_ID
-             # --deploy also checks python version requirements- echo $HOME
-             - pipenv install --dev --deploy- echo $PI
-             - cache store pipenv-$(checksum Pipfile.lock) .venv- pwd
-       prologue:
-           commands:
-             - sudo pip install pipenv
-             - checkout
-       env_vars:
-            - name: PIPENV_VENV_IN_PROJECT
-              value: "true"
+        - name: Using SECRET_TWO
+          commands:
+            - checkout
+            - echo $SECRET_TWO
+            - ls -l .semaphore
+            - echo $SEMAPHORE_GIT_SHA
+            - echo $SEMAPHORE_GIT_URL
+            - echo $SEMAPHORE_GIT_DIR
 
-  - name: Test everything
-    task:
-       jobs:
-         - name: Everything
-           commands:
-             - pipenv run test
-       prologue:
-           commands:
-             - checkout
-       env_vars:
-            - name: PIPENV_VENV_IN_PROJECT
-              value: "true"
+      secrets:
+        - name: mySecrets
+        - name: more-mihalis-secrets
