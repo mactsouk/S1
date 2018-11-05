@@ -1,30 +1,40 @@
-version: v1.0
-name: Pipeline configuration with secrets 
+version: "v1.0"
+name: Python Example
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+
 blocks:
-  - task:
+  - name: Install dependencies
+    task:
+      env_vars:
+        - name: PIPENV_VENV_IN_PROJECT
+          value: "true"
+      prologue:
+        commands:
+          - sudo pip install pipenv
+          - checkout
       jobs:
-        - name: Using secrets 
+        - name: Install and cache dependencies
           commands:
-            - checkout
-            - ls -l .semaphore
-            - echo $SEMAPHORE_PIPELINE_ID
-            - echo "Hello World!"
-            - echo $SECRET_ONE
-            - echo $SECRET_TWO
+            - cache restore pipenv-$(checksum Pipfile.lock)
+            # --deploy also checks python version requirements
+            - pipenv install --dev --deploy
+            - cache store pipenv-$(checksum Pipfile.lock) .venv
 
-        - name: Using SECRET_TWO
+  - name: Tests
+    task:
+      env_vars:
+        - name: PIPENV_VENV_IN_PROJECT
+          value: "true"
+      prologue:
+        commands:
+          - sudo pip install pipenv
+          - checkout
+          - cache restore pipenv-$(checksum Pipfile.lock)
+      jobs:
+        - name: Everything
           commands:
-            - checkout
-            - echo $SECRET_TWO
-            - ls -l .semaphore
-            - echo $SEMAPHORE_GIT_SHA
-            - echo $SEMAPHORE_GIT_URL
-            - echo $SEMAPHORE_GIT_DIR
-
-      secrets:
-        - name: mySecrets
-        - name: more-mihalis-secrets
+            # assuming you have "test" in your Pipfile scripts
+            - pipenv run test
