@@ -41,19 +41,3 @@ blocks:
               value: true
 
 
-  - name: Tests
-    task:
-       jobs:
-         - name: Everything
-           commands:
-             # assuming you have "test" in your Pipfile scripts
-             - pipenv run test
-       prologue:
-           commands:
-             - sudo pip install pipenv
-             - checkout
-             - cache restore pipenv-$(checksum Pipfile.lock)
-       env_vars:
-            - name: PIPENV_VENV_IN_PROJECT
-              value: true
-
