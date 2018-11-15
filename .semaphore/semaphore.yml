@@ -2,7 +2,7 @@ version: v1.0
 name: Pipeline configuration with secrets 
 agent:
   machine:
-    type: e1-standard-8
+    type: e1-standard-2
     os_image: ubuntu1804
 blocks:
   - task:
@@ -10,7 +10,7 @@ blocks:
         - name: Using secrets 
           commands:
             - checkout
-            - ls -l .semaphore
+            - ls -l ~/.semaphore
             - echo $SEMAPHORE_PIPELINE_ID
             - echo "Hello World!"
             - echo $SECRET_ONE
@@ -20,7 +20,7 @@ blocks:
           commands:
             - checkout
             - echo $SECRET_TWO
-            - ls -l .semaphore
+            - ls -l ~/.semaphore
             - echo $SEMAPHORE_GIT_SHA
             - echo $SEMAPHORE_GIT_URL
             - echo $SEMAPHORE_GIT_DIR
